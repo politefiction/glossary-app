@@ -118,10 +118,31 @@ getEntries = async (req, res) => {
     }).catch(err => console.log(err))
 }
 
+searchEntries = async (req, res) => {
+    await Entry.find({ /* $or: [
+            {"term":/req.params.querystring/},
+            {"definition":/req.params.querystring/}
+        ]
+        */ }, (err, entries) => {
+            if (err) {
+                return res.status(400).json({ success: false, error: err })
+            }
+
+            if (!entries.length) {
+                return res
+                    .status(404)
+                    .json({ success: false, error: 'Entries not found' })
+            }
+
+            return res.status(200).json({ success: true, data: entries })
+        }).catch(err => console.log(err))
+}
+
 module.exports = {
     createEntry,
     updateEntry,
     deleteEntry,
     getEntries,
-    getEntryById
+    getEntryById,
+    searchEntries
 }
