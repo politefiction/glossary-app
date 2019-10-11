@@ -19,7 +19,7 @@ app.use(bodyParser.json())
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
 app.get('/', (req, res) => {
-    res.send('Hello World! Testing, testing')
+    res.send('Hello World!')
 })
 
 app.use('/api', entryRouter)

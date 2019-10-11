@@ -119,11 +119,11 @@ getEntries = async (req, res) => {
 }
 
 searchEntries = async (req, res) => {
-    await Entry.find({ /* $or: [
-            {"term":/req.params.querystring/},
-            {"definition":/req.params.querystring/}
-        ]
-        */ }, (err, entries) => {
+    let regex = new RegExp(`${req.params.query}`, "i")
+    await Entry.find({ $or: [
+            { term: regex },
+            { definition: regex }
+        ]}, (err, entries) => {
             if (err) {
                 return res.status(400).json({ success: false, error: err })
             }
