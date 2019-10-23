@@ -1,11 +1,30 @@
 const mongoose = require('mongoose')
 
-mongoose
-    .connect('mongodb://127.0.0.1:27017/entries', { useNewUrlParser: true })
-    .catch(e => {
-        console.error('Connection error', e.message)
-    })
 
-const db = mongoose.connection
+const entryDB = mongoose.createConnection(
+    'mongodb://127.0.0.1:27017/entries', { useNewUrlParser: true }
+)
 
-module.exports = db
+const adminDB = mongoose.createConnection(
+    'mongodb://127.0.0.1:27017/admin', { useNewUrlParser: true }
+)
+
+try {
+    entryDB
+    console.log('Connected to entryDB')
+} catch (error) {
+    console.log(error)
+}
+
+try {
+    adminDB
+    console.log('Connected to adminDB')
+} catch (error) {
+    console.log(error)
+}
+
+module.exports = { 
+    entryDB, 
+    adminDB,
+    secretOrKey: "secret"
+}
