@@ -7,10 +7,10 @@ const entryRouter = require('./routes/entry-router')
 const adminRouter = require('./routes/admin-router')
 
 const app = express()
-const apiPort = 3000
+const apiPort = 8000
 
 var corsOptions = {
-    origin: 'http://localhost:8000',
+    origin: 'http://localhost:3000',
     credentials: true
 }
 
@@ -29,6 +29,6 @@ app.use(passport.initialize())
 require('./validation/passport')
 
 app.use('/api', entryRouter)
-app.use('/api/admin', adminRouter)
+app.use('/api/users', adminRouter)
 
 app.listen(apiPort, () => console.log(`Server running on port ${apiPort}`))
