@@ -10,6 +10,25 @@ opts.secretOrKey = secret
 module.exports = passport => {
     passport.use(
         new JwtStrategy(opts, (jwt_payload, done) => {
+            Admin.findOne({ id: jwt_payload.sub }, (err, admin) => {
+                if (err) { 
+                    console.log(err)
+                    return done(err, false) 
+                }
+                if (admin) { 
+                    return done(null, admin) 
+                } else {
+                    return done(null, false)
+                }
+            })
+        })
+    )
+}
+
+/*
+module.exports = passport => {
+    passport.use(
+        new JwtStrategy(opts, (jwt_payload, done) => {
             Admin.findById(jwt_payload.id)
                 .then(admin => {
                     if (admin) {
@@ -20,3 +39,4 @@ module.exports = passport => {
         })
     )
 }
+*/
