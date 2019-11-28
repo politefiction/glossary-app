@@ -1,12 +1,12 @@
 const mongoose = require('mongoose')
-
+const config = require('../config/default')
 
 const entryDB = mongoose.createConnection(
-    'mongodb://127.0.0.1:27017/entries', { useUnifiedTopology: true, useNewUrlParser: true }
+    config.entryMongoURI, { useUnifiedTopology: true, useNewUrlParser: true }
 )
 
 const adminDB = mongoose.createConnection(
-    'mongodb://127.0.0.1:27017/admin', { useUnifiedTopology: true, useNewUrlParser: true }
+    config.adminMongoURI, { useUnifiedTopology: true, useNewUrlParser: true }
 )
 
 try {
@@ -26,5 +26,5 @@ try {
 module.exports = { 
     entryDB, 
     adminDB,
-    secretOrKey: "secret"
+    secret: config.jwtSecret
 }

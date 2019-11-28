@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const passport = require('passport')
+require('./validation/passport')
 const { entryDB, adminDB } = require('./db')
 const entryRouter = require('./routes/entry-router')
 const adminRouter = require('./routes/admin-router')
@@ -16,7 +17,8 @@ var corsOptions = {
 
 app.use(bodyParser.urlencoded({ extended:true }))
 app.use(cors(corsOptions))
-app.use(bodyParser.json())
+app.use(express.json())
+app.use(express.json())
 
 entryDB.on('error', console.error.bind(console, 'MongoDB connection error:'))
 adminDB.on('error', console.error.bind(console, 'MongoDB connection error:'))
@@ -26,9 +28,12 @@ app.get('/', (req, res) => {
 })
 
 app.use(passport.initialize())
-require('./validation/passport')
+//require('./validation/passport')
 
 app.use('/api', entryRouter)
 app.use('/api/users', adminRouter)
 
-app.listen(apiPort, () => console.log(`Server running on port ${apiPort}`))
+
+app.listen(apiPort, () => 
+    console.log(`Server running on port ${apiPort}`)
+)

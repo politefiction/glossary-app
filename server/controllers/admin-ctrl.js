@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 const Admin = require('../models/admin-model')
 const validateRegisterInput = require('../validation/register')
 const validateLoginInput = require('../validation/login')
-const { secretOrKey } = require('../db')
+const { secret } = require('../db')
 
 validateRegistration = (req, res) => {
     const { errors, isValid } = validateRegisterInput(req.body)
@@ -25,7 +25,26 @@ validateRegistration = (req, res) => {
                     newAdmin.password = hash
                     newAdmin
                         .save()
-                        .then(admin => res.json(admin))
+                        .then(admin => {
+                            jwt.sign(
+                                { id: admin.id },
+                                secret,
+                                { expiresIn: 3600 },
+                                (err, token) => {
+                                    if (err) throw err
+                                    res.json({
+                                        token,
+                                        admin: {
+                                            id: admin.id,
+                                            username: admin.username,
+                                            email: admin.email
+                                        }
+                                    })
+                                }
+                            )
+
+
+                        })
                         .catch(err => console.log(err))
                 })
             })
@@ -54,12 +73,13 @@ validateLogin = (req, res) => {
                 }
                 jwt.sign(
                     payload,
-                    secretOrKey,
+                    secret,
                     { expiresIn: 31556926 },
                     (err, token) => {
+                        if (err) throw err
                         res.json({
                             success: true,
-                            token: `Bearer ${token}`
+                            token: `bearer ${token}`
                         })
                     }
                 )
