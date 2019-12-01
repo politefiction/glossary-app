@@ -13,3 +13,7 @@ router.get('/entries', EntryCtrl.getEntries)
 router.get('/entries/:query', EntryCtrl.searchEntries)
 
 module.exports = router
+
+/*
+
+*/

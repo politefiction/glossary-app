@@ -3,16 +3,17 @@ const { ExtractJwt } = require('passport-jwt')
 const Admin = require('../models/admin-model')
 const { secret } = require('../db')
 
-const opts = {}
-opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken()
-opts.secretOrKey = secret
+const opts = {
+    jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('JWT'),
+    secretOrKey: secret
+}
 
 module.exports = passport => {
     passport.use(
         new JwtStrategy(opts, (jwt_payload, done) => {
             Admin.findOne({ id: jwt_payload.sub }, (err, admin) => {
+                console.log(jwt_payload)
                 if (err) { 
-                    console.log(err)
                     return done(err, false) 
                 }
                 if (admin) { 
@@ -24,19 +25,3 @@ module.exports = passport => {
         })
     )
 }
-
-/*
-module.exports = passport => {
-    passport.use(
-        new JwtStrategy(opts, (jwt_payload, done) => {
-            Admin.findById(jwt_payload.id)
-                .then(admin => {
-                    if (admin) {
-                        return done(null, admin)
-                    }
-                    return done(null, false)
-                }).catch(err => console.log(err))
-        })
-    )
-}
-*/

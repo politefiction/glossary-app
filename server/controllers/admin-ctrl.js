@@ -79,7 +79,7 @@ validateLogin = (req, res) => {
                         if (err) throw err
                         res.json({
                             success: true,
-                            token: `bearer ${token}`
+                            token: `JWT ${token}`
                         })
                     }
                 )
