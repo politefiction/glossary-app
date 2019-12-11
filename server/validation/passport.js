@@ -12,7 +12,6 @@ module.exports = passport => {
     passport.use(
         new JwtStrategy(opts, (jwt_payload, done) => {
             Admin.findOne({ id: jwt_payload.sub }, (err, admin) => {
-                console.log(jwt_payload)
                 if (err) { 
                     return done(err, false) 
                 }

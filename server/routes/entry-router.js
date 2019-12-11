@@ -1,7 +1,6 @@
 const express = require('express')
 const EntryCtrl = require('../controllers/entry-ctrl')
 const router = express.Router()
-const auth = require('../middleware/auth')
 const passport = require('passport')
 require('../validation/passport')(passport)
 
