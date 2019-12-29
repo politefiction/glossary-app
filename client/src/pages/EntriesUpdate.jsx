@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import api from '../api'
-import { InputText, InputArea, FormWrapper, Label, Title, Button, CancelButton } from '../style'
+import { InputText, InputArea, FormWrapper, Label, Title, ErrorMsg, Button, CancelButton } from '../style'
 
 class EntriesUpdate extends Component {
     constructor(props) {
@@ -8,7 +8,11 @@ class EntriesUpdate extends Component {
         this.state = {
             id: this.props.match.params.id,
             term: '',
-            definition: ''
+            definition: '',
+            errors: {
+                term: '',
+                definition: ''
+            }
         }
     }
 
@@ -27,12 +31,24 @@ class EntriesUpdate extends Component {
         const payload = { term, definition }
 
         await api.updateEntryById(id, payload).then(res => {
-            window.alert(`Entry updated successfully`)
-            window.location.href = `/entries/view/${this.state.id}`
-            this.setState({
-                term: '',
-                definition: ''
-            })
+            if (res.body) {
+                window.alert(`Entry updated successfully`)
+                window.location.href = `/entries/view/${this.state.id}`
+                this.setState({
+                    term: '',
+                    definition: ''
+                })
+            } else {
+                let resErrors = res.response.data.error.errors
+                let termErr = resErrors.term ? resErrors.term.message : ''
+                let defErr = resErrors.definition ? resErrors.definition.message : ''
+                this.setState({
+                    errors: {
+                        term: termErr,
+                        definition: defErr
+                    }
+                })
+            }
         })
     }
 
@@ -59,12 +75,15 @@ class EntriesUpdate extends Component {
                     value={term}
                     onChange={this.handleChangeInputTerm}
                 />
+                <ErrorMsg>{this.state.errors.term}</ErrorMsg>
 
                 <Label>Definition: </Label>
                 <InputArea 
                     value={definition}
                     onChange={this.handleChangeInputDef}
                 />
+                <ErrorMsg>{this.state.errors.definition}</ErrorMsg>
+
                 <Button onClick={this.handleUpdateEntry}>Update Entry</Button>
                 <CancelButton href={'/entries/list'}>Cancel</CancelButton>                
             </FormWrapper>

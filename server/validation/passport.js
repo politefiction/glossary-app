@@ -1,6 +1,6 @@
 const JwtStrategy = require('passport-jwt').Strategy
 const { ExtractJwt } = require('passport-jwt')
-const Admin = require('../models/admin-model')
+const User = require('../models/user-model')
 const { secret } = require('../db')
 
 const opts = {
@@ -11,12 +11,12 @@ const opts = {
 module.exports = passport => {
     passport.use(
         new JwtStrategy(opts, (jwt_payload, done) => {
-            Admin.findOne({ id: jwt_payload.sub }, (err, admin) => {
+            User.findOne({ id: jwt_payload.sub }, (err, user) => {
                 if (err) { 
                     return done(err, false) 
                 }
-                if (admin) { 
-                    return done(null, admin) 
+                if (user) { 
+                    return done(null, user) 
                 } else {
                     return done(null, false)
                 }

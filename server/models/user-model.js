@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
-const { adminDB } = require('../db')
+const { userDB } = require('../db')
 const Schema = mongoose.Schema
 
-const Admin = new Schema(
+const User = new Schema(
     {
         username: { type: String, required: true },
         email: {type: String, required: true},
@@ -11,4 +11,4 @@ const Admin = new Schema(
     { timestamps: true }
 )
 
-module.exports = adminDB.model('users', Admin)
+module.exports = userDB.model('users', User)

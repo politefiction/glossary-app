@@ -79,7 +79,7 @@ export const InputArea = styled.textarea.attrs({
 `
 
 export const Label = styled.label`
-    margin: 5px;
+    margin: 5px 0 -5px 0;
 `
 
 export const Button = styled.button.attrs({
@@ -92,4 +92,12 @@ export const CancelButton = styled.a.attrs({
     className: 'btn btn-danger'
 })`
     margin: 15px 15px 15px 5px;
+`
+
+export const ErrorMsg = styled.span`
+    display: block;
+    margin: 5px 0;
+    color: red;
+    font-style: italic;
+    font-size: 0.9em;
 `

@@ -2,9 +2,9 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const passport = require('passport')
-const { entryDB, adminDB } = require('./db')
+const { entryDB, userDB } = require('./db')
 const entryRouter = require('./routes/entry-router')
-const adminRouter = require('./routes/admin-router')
+const userRouter = require('./routes/user-router')
 
 const app = express()
 const apiPort = 8000
@@ -19,7 +19,7 @@ app.use(cors(corsOptions))
 app.use(express.json())
 
 entryDB.on('error', console.error.bind(console, 'MongoDB connection error:'))
-adminDB.on('error', console.error.bind(console, 'MongoDB connection error:'))
+userDB.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
 app.get('/', (req, res) => {
     res.send('Hello World!')
@@ -29,7 +29,7 @@ app.use(passport.initialize())
 require('./validation/passport')
 
 app.use('/api', entryRouter)
-app.use('/api/users', adminRouter)
+app.use('/api/users', userRouter)
 
 
 app.listen(apiPort, () => 

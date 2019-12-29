@@ -5,8 +5,8 @@ const entryDB = mongoose.createConnection(
     config.entryMongoURI, { useUnifiedTopology: true, useNewUrlParser: true }
 )
 
-const adminDB = mongoose.createConnection(
-    config.adminMongoURI, { useUnifiedTopology: true, useNewUrlParser: true }
+const userDB = mongoose.createConnection(
+    config.userMongoURI, { useUnifiedTopology: true, useNewUrlParser: true }
 )
 
 try {
@@ -17,14 +17,14 @@ try {
 }
 
 try {
-    adminDB
-    console.log('Connected to adminDB')
+    userDB
+    console.log('Connected to userDB')
 } catch (error) {
     console.log(error)
 }
 
 module.exports = { 
     entryDB, 
-    adminDB,
+    userDB,
     secret: config.jwtSecret
 }

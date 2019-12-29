@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import { Wrapper, Label, InputText, Button} from '../../style'
+import { Wrapper, Label, InputText, Button, ErrorMsg } from '../../style'
 import { loginUser } from '../../actions/authActions'
 
 
@@ -15,14 +15,6 @@ const FormGroup = styled.div.attrs({
     className: "form-group"
 })`
     margin-top: 10px;
-`
-
-const ErrorMsg = styled.span`
-    display: block;
-    margin-top: -10px;
-    color: red;
-    font-style: italic;
-    font-size: 0.9em;
 `
 
 class Login extends Component {
