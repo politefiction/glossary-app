@@ -4,6 +4,7 @@ const User = require('../models/user-model')
 const validateRegisterInput = require('../validation/register')
 const validateLoginInput = require('../validation/login')
 const { secret } = require('../db')
+const config = require('../config/default')
 
 validateRegistration = (req, res) => {
     const { errors, isValid } = validateRegisterInput(req.body)
@@ -17,7 +18,8 @@ validateRegistration = (req, res) => {
             const newUser = new User({
                 username: req.body.username,
                 email: req.body.email,
-                password: req.body.password
+                password: req.body.password,
+                isAdmin: (req.body.adminCode === config.adminCode)
             })
             bcrypt.genSalt(10, (err, salt) => {
                 bcrypt.hash(newUser.password, salt, (err, hash) => {

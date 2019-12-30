@@ -47,6 +47,7 @@ class Register extends Component {
             email: "",
             password: "",
             passwordval: "",
+            adminCode: "",
             errors: {}
         }
     }
@@ -71,20 +72,20 @@ class Register extends Component {
 
     onSubmit = e => {
         e.preventDefault()
-        const { username, email, password, passwordval } = this.state
+        const { username, email, password, passwordval, adminCode } = this.state
         const newUser = {
             username: username,
             email: email,
             password: password,
-            passwordval: passwordval
+            passwordval: passwordval,
+            adminCode: adminCode
         }
-        console.log(newUser)
         this.props.registerUser(newUser, this.props.history)
     }
 
     
     render () {
-        const { username, email, password, passwordval, errors } = this.state
+        const { username, email, password, passwordval, adminCode, errors } = this.state
 
         return (
             <Wrapper>
@@ -142,6 +143,18 @@ class Register extends Component {
                                 />
                                 <label htmlFor="passwordval">Confirm Password</label>
                                 <ErrorMsg>{errors.passwordval}</ErrorMsg>
+                            </FormGroup>
+                            <FormGroup>
+                                <Input 
+                                    onChange={this.onChange}
+                                    value={adminCode}
+                                    error={errors.adminCode}
+                                    id="adminCode"
+                                    type="text"
+                                    className={classnames("", {invalid: errors.adminCode})}
+                                />
+                                <label htmlFor="adminCode">Admin Code</label>
+                                <ErrorMsg>{errors.adminCode}</ErrorMsg>
                             </FormGroup>
                             <Button>Sign up</Button>
                         </form>
