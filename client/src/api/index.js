@@ -1,6 +1,5 @@
 import axios from 'axios'
 import setAuthToken from '../utils/setAuthToken'
-//import { GET_ERRORS } from '../actions/types'
 
 if (localStorage.jwtToken) setAuthToken(localStorage.jwtToken)
 
@@ -9,9 +8,9 @@ const api = axios.create({
     baseURL: 'http://localhost:8000/api'
 })
 
-export const insertEntry = payload => api.post(`/entry`, payload).catch(err => { return err })
+export const insertEntry = payload => api.post(`/entry`, payload).catch(err => err)
 export const getAllEntries = () => api.get(`/entries`)
-export const updateEntryById = (id, payload) => api.put(`/entry/${id}`, payload).catch(err => { return err })
+export const updateEntryById = (id, payload) => api.put(`/entry/${id}`, payload).catch(err => err)
 export const deleteEntryById = id => api.delete(`/entry/${id}`)
 export const getEntryById = id => api.get(`/entry/${id}`)
 export const searchEntries = query => api.get(`/entries/${query}`)

@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-//import { connect } from 'react-redux'
-//import PropTypes from 'prop-types'
 import api from '../api'
 import { InputText, InputArea, FormWrapper, Label, Title, ErrorMsg, Button, CancelButton } from '../style'
 
@@ -32,8 +30,9 @@ class EntriesInsert extends Component {
         const payload = { term, definition }
 
         await api.insertEntry(payload).then(res => {
-            if (res.body) {
+            if (res.status === 201) {
                 window.alert(`Entry inserted successfully`)
+                console.log(res.status)
                 window.location.href = `/entries/view/${res.data.id}`
                 this.setState({
                     term: '',
@@ -43,7 +42,7 @@ class EntriesInsert extends Component {
                         definition: ''
                     }
                 })
-            } else {               
+            } else {     
                 let resErrors = res.response.data.error.errors
                 let termErr = resErrors.term ? resErrors.term.message : ''
                 let defErr = resErrors.definition ? resErrors.definition.message : ''

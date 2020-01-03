@@ -31,7 +31,7 @@ class EntriesUpdate extends Component {
         const payload = { term, definition }
 
         await api.updateEntryById(id, payload).then(res => {
-            if (res.body) {
+            if (res.status === 200) {
                 window.alert(`Entry updated successfully`)
                 window.location.href = `/entries/view/${this.state.id}`
                 this.setState({

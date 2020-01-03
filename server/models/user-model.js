@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const { userDB } = require('../db')
+const { glossaryDB } = require('../db')
 const Schema = mongoose.Schema
 
 const User = new Schema(
@@ -12,4 +12,4 @@ const User = new Schema(
     { timestamps: true }
 )
 
-module.exports = userDB.model('users', User)
+module.exports = glossaryDB.model('users', User)

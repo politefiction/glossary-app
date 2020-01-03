@@ -2,7 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const passport = require('passport')
-const { entryDB, userDB } = require('./db')
+const { glossaryDB } = require('./db')
 const entryRouter = require('./routes/entry-router')
 const userRouter = require('./routes/user-router')
 
@@ -18,8 +18,7 @@ app.use(bodyParser.urlencoded({ extended:true }))
 app.use(cors(corsOptions))
 app.use(express.json())
 
-entryDB.on('error', console.error.bind(console, 'MongoDB connection error:'))
-userDB.on('error', console.error.bind(console, 'MongoDB connection error:'))
+glossaryDB.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
 app.get('/', (req, res) => {
     res.send('Hello World!')

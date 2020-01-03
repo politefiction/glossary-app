@@ -1,30 +1,18 @@
 const mongoose = require('mongoose')
 const config = require('../config/default')
 
-const entryDB = mongoose.createConnection(
-    config.entryMongoURI, { useUnifiedTopology: true, useNewUrlParser: true }
-)
-
-const userDB = mongoose.createConnection(
-    config.userMongoURI, { useUnifiedTopology: true, useNewUrlParser: true }
+const glossaryDB = mongoose.createConnection(
+    config.mongoURI, { useUnifiedTopology: true, useNewUrlParser: true }
 )
 
 try {
-    entryDB
-    console.log('Connected to entryDB')
-} catch (error) {
-    console.log(error)
-}
-
-try {
-    userDB
-    console.log('Connected to userDB')
+    glossaryDB
+    console.log('Connected to glossaryDB')
 } catch (error) {
     console.log(error)
 }
 
 module.exports = { 
-    entryDB, 
-    userDB,
+    glossaryDB,
     secret: config.jwtSecret
 }

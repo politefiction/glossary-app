@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const { entryDB } = require('../db')
+const { glossaryDB } = require('../db')
 const Schema = mongoose.Schema
 
 const Entry = new Schema(
@@ -7,9 +7,7 @@ const Entry = new Schema(
         term: { 
             type: String, 
             validate: {
-                validator: function(v) {
-                  return /[a-z]/gi.test(v);
-                },
+                validator: v => { return /[a-z]/gi.test(v) },
                 message: 'Term must contain text.'
             },
             required: [true, 'You must enter a term.'] 
@@ -17,9 +15,7 @@ const Entry = new Schema(
         definition: { 
             type: String,
             validate: {
-                validator: function(v) {
-                  return /[a-z]/gi.test(v);
-                },
+                validator: v => { return /[a-z]/gi.test(v) },
                 message: 'Definition must contain text.'
             }, 
             required: [true, 'You must enter a definition.'] 
@@ -28,12 +24,4 @@ const Entry = new Schema(
     { timestamps: true }
 )
 
-const Admin = new Schema(
-    {
-        username: { type: String, required: true },
-        password: { type: String, required: true }
-    },
-    { timestamps: true }
-)
-
-module.exports = entryDB.model('users', Entry)
+module.exports = glossaryDB.model('entries', Entry)

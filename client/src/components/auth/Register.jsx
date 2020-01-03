@@ -1,3 +1,6 @@
+// Keeping in case I eventually allow 
+//other users to register for some reason.
+
 import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import styled from 'styled-components'
