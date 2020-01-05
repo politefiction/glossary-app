@@ -5,4 +5,11 @@ import EntriesView from './EntriesView'
 import EntriesSearch from './EntriesSearch'
 import Main from './Main'
 
-export { EntriesList, EntriesInsert, EntriesUpdate, EntriesView, EntriesSearch, Main }
+export {
+  EntriesList,
+  EntriesInsert,
+  EntriesUpdate,
+  EntriesView,
+  EntriesSearch,
+  Main
+}

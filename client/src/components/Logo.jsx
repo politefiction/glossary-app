@@ -3,17 +3,19 @@ import styled from 'styled-components'
 import logo from '../cropped-logo.png'
 
 const Wrapper = styled.a.attrs({
-    className: 'navbar-brand',
+  className: 'navbar-brand'
 })``
 
 class Logo extends Component {
-    render() {
-        return (
-            <Wrapper>
-                <a href="/"><img src={logo} width="200" height="80" alt="Site logo" /></a>
-            </Wrapper>
-        )
-    }
+  render() {
+    return (
+      <Wrapper>
+        <a href='/'>
+          <img src={logo} width='200' height='80' alt='Site logo' />
+        </a>
+      </Wrapper>
+    )
+  }
 }
 
 export default Logo
