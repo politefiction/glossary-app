@@ -27,15 +27,15 @@ require('./validation/passport')
 app.use('/api', entryRouter)
 app.use('/api/users', userRouter)
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-}) 
-
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'))
   app.get('*', (req, res) => {
     console.log(path.join(__dirname, 'client/build', 'index.html'))
     res.sendFile(path.join(__dirname, 'client/build', 'index.html'))
+  })
+} else {
+  app.get('/', (req, res) => {
+    res.send('Environment not set as production, for some reason')
   })
 }
 
