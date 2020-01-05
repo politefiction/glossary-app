@@ -7,6 +7,8 @@ const baseURL = process.env.NODE_ENV === 'production'
   ? process.env.PORT
   : 'http://localhost:8000/api'
 
+  console.log(procees.env.PORT)
+
 const api = axios.create({
   withCredentials: true,
   baseURL: `${baseURL}`
