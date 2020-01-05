@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import logo from '../cropped-logo.png'
 
-const Wrapper = styled.a.attrs({
+const Wrapper = styled.div.attrs({
   className: 'navbar-brand'
 })``
 
