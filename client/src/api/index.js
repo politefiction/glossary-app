@@ -5,8 +5,6 @@ if (localStorage.jwtToken) setAuthToken(localStorage.jwtToken)
 
 const baseURL = process.env.PORT || 'http://localhost:8000/api'
 
-console.log(process.env)
-
 const api = axios.create({
   withCredentials: true,
   baseURL: `${baseURL}`
@@ -14,7 +12,7 @@ const api = axios.create({
 
 export const insertEntry = payload =>
   api.post(`/entry`, payload).catch(err => err)
-export const getAllEntries = () => api.get(`/entries`).catch(err => console.log(err))
+export const getAllEntries = () => api.get(`/entries`)
 export const updateEntryById = (id, payload) =>
   api.put(`/entry/${id}`, payload).catch(err => err)
 export const deleteEntryById = id => api.delete(`/entry/${id}`)

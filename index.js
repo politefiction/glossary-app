@@ -11,7 +11,7 @@ const app = express()
 const apiPort = process.env.PORT || 8000
 
 var corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: ['http://localhost:3000', 'https://vast-peak-39324.herokuapp.com/'],
   credentials: true
 }
 
