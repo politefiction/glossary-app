@@ -4,10 +4,10 @@ import setAuthToken from '../utils/setAuthToken'
 if (localStorage.jwtToken) setAuthToken(localStorage.jwtToken)
 
 const baseURL = process.env.NODE_ENV === 'production' 
-  ? 'https://vast-peak-39324.herokuapp.com/' 
+  ? 'https://vast-peak-39324.herokuapp.com/api' 
   : 'http://localhost:8000/api'
 
-//const baseURL = 'https://vast-peak-39324.herokuapp.com/' || 'http://localhost:8000/api'
+//const baseURL = 'https://vast-peak-39324.herokuapp.com/api' || 'http://localhost:8000/api'
 
 const api = axios.create({
   withCredentials: true,
