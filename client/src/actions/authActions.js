@@ -3,9 +3,14 @@ import setAuthToken from '../utils/setAuthToken'
 import jwt_decode from 'jwt-decode'
 import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from './types'
 
+const baseURL =
+  process.env.NODE_ENV === 'production'
+    ? 'https://vast-peak-39324.herokuapp.com/api'
+    : 'http://localhost:8000/api'
+
 const api = axios.create({
   withCredentials: true,
-  baseURL: 'http://localhost:8000/api/users'
+  baseURL: `${baseURL}`
 })
 
 export const registerUser = (userData, history) => dispatch => {
