@@ -3,7 +3,11 @@ import setAuthToken from '../utils/setAuthToken'
 
 if (localStorage.jwtToken) setAuthToken(localStorage.jwtToken)
 
-const baseURL = process.env.PORT || 'http://localhost:8000/api'
+const baseURL = process.env.NODE_ENV === 'production' 
+  ? 'https://vast-peak-39324.herokuapp.com/' 
+  : 'http://localhost:8000/api'
+
+//const baseURL = 'https://vast-peak-39324.herokuapp.com/' || 'http://localhost:8000/api'
 
 const api = axios.create({
   withCredentials: true,
@@ -11,8 +15,11 @@ const api = axios.create({
 })
 
 export const insertEntry = payload =>
-  api.post(`/entry`, payload).catch(err => err)
-export const getAllEntries = () => api.get(`/entries`)
+  api.post(`/entry`, payload).catch(err => {
+    console.log(err.response)
+    return err
+  })
+export const getAllEntries = () => api.get(`/entries`).catch(err => console.log(Object.keys(err)))
 export const updateEntryById = (id, payload) =>
   api.put(`/entry/${id}`, payload).catch(err => err)
 export const deleteEntryById = id => api.delete(`/entry/${id}`)
