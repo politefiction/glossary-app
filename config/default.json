@@ -1,5 +1,5 @@
 {
-    "mongoURI": "mongodb+srv://cjones88:06scarlett@glossary-cluster-hrnyb.mongodb.net/test?retryWrites=true&w=majority",
+    "mongoURI": "mongodb://politefiction:10whileimalone@ds359868.mlab.com:59868/heroku_gs34vkjz",
     "jwtSecret": "gl_myJwtSecret",
     "adminCode": "backtoworkyou"
 }
